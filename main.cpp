@@ -83,9 +83,9 @@ int main(int argc, char** argv) {
     //MUESTRA LA CANTIDAD COMBINACIONES DE LA LINEA DE INICIO
     for(x=0;x<30;x++)
     {
-        for(z=0;z<10;z++)
+        for(z=0;z<11;z++)
         {
-            if(LC[0][z]==lineas[find_li][x])
+            if(LC[0][z]==lineas[find_li+1][x])
             {
                 i++;
             }
@@ -111,9 +111,9 @@ int main(int argc, char** argv) {
      */
     for(x=0;x<30;x++)
     {
-        for(z=0;z<10;z++)
+        for(z=0;z<11;z++)
         {
-            if(LC[0][z]==lineas[find_li][x])
+            if(LC[0][z]==lineas[find_li+1][x])
             {
                 comb[0][j]=x;
                 h=1;
