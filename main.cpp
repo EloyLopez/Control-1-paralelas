@@ -9,11 +9,11 @@ int main(int argc, char** argv) {
     string inicio;
     string fin;
     //contadores
-    int x=0,y=0,z=0,i=0,j=0,h=1,k;
+    int x=0,y=0,z=0,i=0,j=0,h=1,k,l=0;
     //variable para estacion inicial y linea inicial
-    int find_ei,find_li;
+    int find_ei,find_li,find_lii;
     //variable para estacion final y linea final
-    int find_ef,find_lf;
+    int find_ef,find_lf,find_lff;
     
     //find_ei y find_ef muestran la posicion en que se encuentra esa estacion en su linea
     
@@ -62,6 +62,30 @@ int main(int argc, char** argv) {
                 cout<<endl<<"inicio"<<endl;
                 cout<<lineas[y+1][x]<<endl;
                 find_li=y;
+                if(y==0)
+                {
+                    find_lii=1;
+                }
+                 if(y==2)
+                {
+                    find_lii=2;
+                }
+                 if(y==4)
+                {
+                    find_lii=3;
+                }
+                 if(y==6)
+                {
+                    find_lii=4;
+                }
+                 if(y==8)
+                {
+                    find_lii=5;
+                }
+                 if(y==10)
+                {
+                    find_lii=6;
+                }
                 find_ei=x;
             }
         }        
@@ -75,6 +99,30 @@ int main(int argc, char** argv) {
                 cout<<endl<<"fin"<<endl;
                 cout<<lineas[y+1][x]<<endl;
                 find_lf=y;
+                if(y==0)
+                {
+                    find_lff=1;
+                }
+                 if(y==2)
+                {
+                    find_lff=2;
+                }
+                 if(y==4)
+                {
+                    find_lff=3;
+                }
+                 if(y==6)
+                {
+                    find_lff=4;
+                }
+                 if(y==8)
+                {
+                    find_lff=5;
+                }
+                 if(y==10)
+                {
+                    find_lff=6;
+                }
                 find_ef=x;
             }
         }        
@@ -113,15 +161,17 @@ int main(int argc, char** argv) {
     {
         for(z=0;z<11;z++)
         {
+            
             if(LC[0][z]==lineas[find_li+1][x])
             {
                 comb[0][j]=x;
+              
                 h=1;
                for(k=0;k<7;k++)
                 {
                   if(LC[k][z]=="1")
                   {
-                      comb[h][j]=k;
+                      comb[h][z]=k;
                       h++;
                   }
                 }
@@ -129,5 +179,8 @@ int main(int argc, char** argv) {
             }
         }
     }
+  
 }
+
+
 
