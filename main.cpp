@@ -162,7 +162,7 @@ int main(int argc, char** argv) {
         for(z=0;z<11;z++)
         {
             
-            if(LC[0][z]==lineas[find_lf+1][x])
+            if(LC[0][z]==lineas[find_li+1][x])
             {
                 comb[0][j]=x;
               
@@ -222,7 +222,7 @@ int main(int argc, char** argv) {
         for(z=0;z<11;z++)
         {
             
-            if(LC[0][z]==lineas[find_li+1][x])
+            if(LC[0][z]==lineas[find_lf+1][x])
             {
                 comb[0][j]=x;
               
