@@ -1,4 +1,3 @@
-
 #include <cstdlib>
 #include <iostream>
 #include <string>
@@ -15,7 +14,9 @@ int main(int argc, char** argv) {
     string inicio;
     string fin;
     //contadores
-    int x=0,y=0,z=0,i=0,j=0,h=1,k,l=0;
+    int x=0,y=0,z=0,i=0,j=0,h=1,k,l=0,n=0,m=0,menor_f=999,menor_i=999;
+    //guarda las combinaciones mas cercanas
+    int comb_i[3][1],comb_f[3][1];
     //variable para estacion inicial y linea inicial
     int find_ei,find_li,find_lii;
     //variable para estacion final y linea final
@@ -133,7 +134,9 @@ int main(int argc, char** argv) {
             }
         }        
     }
-    
+    /*
+     * AQUI EMPIEZA EL ORIGEN
+     */
     //MUESTRA LA CANTIDAD COMBINACIONES DE LA LINEA DE INICIO
     for(x=0;x<30;x++)
     {
@@ -185,21 +188,44 @@ int main(int argc, char** argv) {
             }
         }
     }
+    //DISTANCIAS DESDE EL ORIGEN HASTA LA COMBINACION MAS CERCANA
     for(l=0;l<i;l++)
     {
-        resta[l]=comb[0][l]-find_ei;
+        
+        if(comb[0][l]-find_ei<0)
+        {
+             resta[l]=(comb[0][l]-find_ei)*-1; 
+        }
+        
+        else
+            resta[l]=comb[0][l]-find_ei;
+        //COMBINACION MAS PROXIMA DESDE EL INICIO
+        if(resta[l]<menor_i)
+        {
+            menor_i=resta[l];
+            comb_i[0][0]=comb[0][l];
+            comb_i[1][0]=comb[1][l];
+            comb_i[2][0]=comb[2][l];
+            
+        }
+            
        
     }
-    for(x=0;x<30;x++)                           // COMENTARIO LINEA DESTINO 
+    /*
+     AQUI EMPIEZA EL DESTINO
+     */
+    for(x=0;x<30;x++)                            
     {
         for(z=0;z<11;z++)
         {
             if(LC[0][z]==lineas[find_lf+1][x])        //find_lf cantidad de combinaciones que tiene la linea destino  
             {
-                i++;
+                n++;
             }
         }
     }
+    
+     int comb_d[3][n],resta_d[n];
       //COMB GUARDA EL NUMERO DE LA ESTACION EN LA LINEA INICIAL Y CON LAS LINEAS QUE COMBINA
     /*
      * Lineas
@@ -224,24 +250,47 @@ int main(int argc, char** argv) {
             
             if(LC[0][z]==lineas[find_lf+1][x])
             {
-                comb[0][j]=x;
-              
+                comb_d[0][m]=x;
                 h=1;
                for(k=0;k<7;k++)
                 {
                   if(LC[k][z]=="1")
                   {
-                      comb[h][z]=k;
+                      comb_d[h][z]=k;
                       h++;
                   }
                 }
-                j++;  
+                m++;  
             }
         }
     }
-    for(l=0;l<i;l++)
+     //DISTANCIAS DESDE EL DESTINO A LA COMBINACION MAS CERCANA
+    for(l=0;l<n;l++)
     {
-        resta[l]=comb[0][l]-find_ef;
+        if(comb_d[0][l]-find_ef<0)
+        {
+             resta_d[l]=(comb_d[0][l]-find_ef)*-1; 
+        }
+        
+        else
+            resta_d[l]=comb_d[0][l]-find_ef;
+        
+        //COMBINACION MAS PROXIMA DESDE EL DESTINO
+        if(resta_d[l]<menor_f)
+        {
+            menor_f=resta_d[l];
+            comb_f[0][0]=comb_d[0][l];
+            comb_f[1][0]=comb_d[1][l];
+            comb_f[2][0]=comb_d[2][l];
+        }
+        
     }
+     //DISTANCIA DE UNA COMBINACION
+     if(comb_f[1][0]==comb_i[1][0]||comb_f[2][0]==comb_i[1][0]||comb_f[2][0]==comb_i[2][0]||comb_f[1][0]==comb_i[2][0])
+     {
+         cout<<endl<<menor_f+menor_i<<endl;
+     }
+     
+     
 }
 
