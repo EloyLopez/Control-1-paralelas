@@ -5,6 +5,12 @@
 using namespace std;
 
 int main(int argc, char** argv) {
+     /**
+     * 
+     * @param argc Codigo Estacion de Origen
+     * @param argv Codigo Estacion de Destino
+     * @return 
+     */
 
     string inicio;
     string fin;
@@ -238,6 +244,4 @@ int main(int argc, char** argv) {
         resta[l]=comb[0][l]-find_ef;
     }
 }
-
-/*Este es mi commit*/
 
