@@ -13,10 +13,14 @@ int main(int argc, char** argv) {
 
     string inicio;
     string fin;
+    //Si es 1 se retrocede, si es 0 se avanza
+    int origen=0,destino=0;
+    //guarda
+    int guarda_x, guarda_y,guarda_xf,guarda_yf,valor_i,valor_f;
     //distancia
     int distancia;
     //contadores
-    int x=0,y=0,z=0,i=0,j=0,h=1,k,l=0,n=0,m=0,menor_f=999,menor_i=999,u=0,t=0;
+    int x=0,y=0,z=0,i=0,j=0,h=1,k,l=0,n=0,m=0,menor_f=999,menor_i=999,u=0,t=0,w=0;
     //guarda las combinaciones mas cercanas
     int comb_i[3][1],comb_f[3][1];
     //variable para estacion inicial y linea inicial
@@ -62,6 +66,7 @@ int main(int argc, char** argv) {
     cin>>inicio;
     cout<<endl<<"Estacion de termino"<<endl;
     cin>>fin;
+    //FUNCION QUE MUESTRA COMO LA ESTACION DE ORIGEN GUARDANDO SU FILA Y SU COLUMNA
     for(y=0;y<12;y++)
     {
         for(x=0;x<30;x++)
@@ -71,30 +76,6 @@ int main(int argc, char** argv) {
                 cout<<endl<<"inicio"<<endl;
                 cout<<lineas[y+1][x]<<endl;
                 find_li=y;
-                if(y==0)
-                {
-                    find_lii=1;
-                }
-                 if(y==2)
-                {
-                    find_lii=2;
-                }
-                 if(y==4)
-                {
-                    find_lii=3;
-                }
-                 if(y==6)
-                {
-                    find_lii=4;
-                }
-                 if(y==8)
-                {
-                    find_lii=5;
-                }
-                 if(y==10)
-                {
-                    find_lii=6;
-                }
                 find_ei=x;
             }
         }        
@@ -108,34 +89,10 @@ int main(int argc, char** argv) {
                 cout<<endl<<"fin"<<endl;
                 cout<<lineas[y+1][x]<<endl;
                 find_lf=y;
-                if(y==0)
-                {
-                    find_lff=1;
-                }
-                 if(y==2)
-                {
-                    find_lff=2;
-                }
-                 if(y==4)
-                {
-                    find_lff=3;
-                }
-                 if(y==6)
-                {
-                    find_lff=4;
-                }
-                 if(y==8)
-                {
-                    find_lff=5;
-                }
-                 if(y==10)
-                {
-                    find_lff=6;
-                }
                 find_ef=x;
             }
         }        
-    }
+}
     /*
      * AQUI EMPIEZA EL ORIGEN
      */
@@ -203,30 +160,40 @@ int main(int argc, char** argv) {
         if(comb[0][l]-find_ei<0)
         {
              resta[l]=(comb[0][l]-find_ei)*-1; 
+             
+             origen=1;
         }
         
         else
-            resta[l]=comb[0][l]-find_ei;
+        {
+          resta[l]=comb[0][l]-find_ei;
+          origen=0;
+        }
+            
         //COMBINACION MAS PROXIMA DESDE EL INICIO
         if(resta[l]<menor_i)
         {
-            menor_i=resta[l];
-            comb_i[0][0]=comb[0][l];
-            comb_i[1][0]=comb[1][l];
-            comb_i[2][0]=comb[2][l];
             
-        }
-            
-       
+            if(resta[l]!=0)
+            {
+                //GUARDA LA COMBINACION MAS CERCA AL ORIGEN Y MUESTRA CON QUE LINEAS COMBINA
+                menor_i=resta[l];
+                comb_i[0][0]=comb[0][l];
+                comb_i[1][0]=comb[1][l];
+                comb_i[2][0]=comb[2][l];
+            } 
+        }   
     }
+   
     /*
      AQUI EMPIEZA EL DESTINO
      */
+    //-CUENTA LA CANTIDAD DE COMBINACION QUE TIENE LA LINEA DE DESTINO
     for(x=0;x<30;x++)                            
     {
         for(z=0;z<11;z++)
         {
-            if(LC[0][z]==lineas[find_lf+1][x])        //find_lf cantidad de combinaciones que tiene la linea destino  
+            if(LC[0][z]==lineas[find_lf+1][x])          
             {
                 n++;
             }
@@ -234,7 +201,7 @@ int main(int argc, char** argv) {
     }
     
      int comb_d[3][n],resta_d[n];
-      //COMB GUARDA EL NUMERO DE LA ESTACION EN LA LINEA INICIAL Y CON LAS LINEAS QUE COMBINA
+      //COMB_D GUARDA EL NUMERO DE LA ESTACION EN LA LINEA INICIAL Y CON LAS LINEAS QUE COMBINA
     /*
      * Lineas
      * posicion 0= nombre estacion
@@ -286,55 +253,244 @@ int main(int argc, char** argv) {
         if(comb_d[0][l]-find_ef<0)
         {
              resta_d[l]=(comb_d[0][l]-find_ef)*-1; 
+             destino=1;
         }
         
         else
+        {
             resta_d[l]=comb_d[0][l]-find_ef;
+            destino=0;
+        }
+            
         
         //COMBINACION MAS PROXIMA DESDE EL DESTINO
         if(resta_d[l]<menor_f)
         {
-            menor_f=resta_d[l];
-            comb_f[0][0]=comb_d[0][l];
-            comb_f[1][0]=comb_d[1][l];
-            comb_f[2][0]=comb_d[2][l];
+            
+            if(resta_d[l]!=0)
+            {
+                //OBTIENE EL LA MENOR DISTANCIA ENTRE DESTINO Y SU COMBINACION
+                menor_f=resta_d[l];
+                //GUARDA NOMBRE DE LA COMBINACION Y CON QUE LINEAS COMBINA
+                comb_f[0][0]=comb_d[0][l];
+                comb_f[1][0]=comb_d[1][l];
+                comb_f[2][0]=comb_d[2][l];
+            }
+            
         }
         
     }
+     string avance_inicio[menor_i];
+     string avance_final[menor_f];
      //DISTANCIA DE UNA COMBINACION Y MISMA ESTACION DE COMBINACION
      if((comb_f[1][0]==comb_i[1][0]||comb_f[2][0]==comb_i[1][0]||comb_f[2][0]==comb_i[2][0]||comb_f[1][0]==comb_i[2][0])&& lineas[find_lf+1][comb_f[0][0]]==lineas[find_li+1][comb_i[0][0]])
      {
+        //MUESTA LA DISTANCIA MAS CORTA
+         if(origen==0)
+         {
+             y=1;
+             for(x=0;x<menor_i;x++)
+             {
+                 avance_inicio[x]=lineas[find_li+1][find_ei+y];
+                 y++;
+             }
+         }
+         else
+         {
+             y=1;
+             for(x=0;x<menor_i;x++)
+             {
+                 avance_inicio[x]=lineas[find_li+1][find_ei-y];
+                 y++;
+             }
+         }
+        if(destino==0)
+         {
+             y=1;
+             for(x=0;x<(menor_f-1);x++)
+             {
+                 avance_final[x]=lineas[find_lf+1][find_ef+y];
+                 
+                 y++;
+             }
+         }
+         else
+         {
+             y=1;
+             for(x=0;x<(menor_f-1);x++)
+             {
+                 
+                 avance_final[x]=lineas[find_lf+1][find_ef-y];
+                 y++;
+             }
+         }
+         cout<<endl<<lineas[find_li+1][find_ei]<< "-";
+         for(x=0;x<menor_i;x++)
+             {
+                cout<< avance_inicio[x]<<"-";
+                
+             }
+         for(x=0;x<menor_f;x++)
+             {
+                cout<< avance_final[x]<<"-";
+                
+             }
+         cout<<lineas[find_lf+1][find_ef]<<endl;
          cout<<endl<<menor_f+menor_i<<endl;   
      }
      //DISTANCIA DE UNA COMBINACION Y DIFERENTE ESTACION DE COMBINACION
      else if((comb_f[1][0]==comb_i[1][0]||comb_f[2][0]==comb_i[1][0]||comb_f[2][0]==comb_i[2][0]||comb_f[1][0]==comb_i[2][0])&& lineas[find_lf+1][comb_f[0][0]]!=lineas[find_li+1][comb_i[0][0]])
      {
-         for(x=0;x<30;x++)
-         {
-             if(lineas[find_lf+1][comb_f[0][0]]==lineas[find_lf+1][x])
-             {
-                 distancia=x;
-                 
-             }
-         }
+         //distancia desde el destino a su combinacion mas cercana
          for(x=0;x<30;x++)
          {
              if(lineas[find_li+1][comb_i[0][0]]==lineas[find_lf+1][x])
              {
-                ;
+                 for(y=0;y<30;y++)
+                  {
+                        if(lineas[find_lf+1][comb_f[0][0]]==lineas[find_lf+1][y])
+                        {
+                             distancia=y;
+                        }
+                   }
+                 
                  if((distancia-x)<0)
                  {
                      distancia=(distancia-x)*-1;
                  }
                  else
-                     distancia=distancia-x;
-                     
+                     distancia=distancia-x;    
              }
+             
+             else
+             {
+                 
+             }  
          }
-
          cout<<endl<<menor_f+menor_i+distancia<<endl; 
      }
-   
      
+     //COMBINACION 3 LINEAS
      
+     else if((comb_f[1][0]!=comb_i[1][0]||comb_f[2][0]!=comb_i[1][0]||comb_f[2][0]!=comb_i[2][0]||comb_f[1][0]!=comb_i[2][0]))
+     {
+         for(y=0;y<12;y++)
+         {
+             for(x=0;x<30;x++)
+                {
+                 //GUARDA LA LINEA EN LA QUE ESTA LA ESTACION DONDE SE COMBINA
+                    if(lineas[find_lf+1][comb_f[0][0]]==lineas[y][x] && (find_lf+1)!=y)
+                      {
+                        guarda_yf=y;
+                            if(y==1)
+                            {
+                                guarda_y=1;
+                            }
+                            if(y==3)
+                            {
+                                guarda_y=2;
+                            }
+                            if(y==5)
+                            {
+                                guarda_y=3;
+                             }
+                             if(y==7)
+                             {
+                                guarda_y=4;
+                            }
+                             if(y==9)
+                             {
+                                guarda_y=5;
+                             }
+                             if(y==11)
+                            {
+                                guarda_y=6;
+                             }
+                      }
+                }
+             for(x=0;x<30;x++)
+             {
+                 if(lineas[find_li+1][comb_i[0][0]]==lineas[y][x]&& (find_li+1)!=y)
+                 {
+                     //GUARDA LA LINEA EN LA QUE ESTA LA ESTACION DONDE SE COMBINA
+                     guarda_xf=y;
+                     if(y==1)
+                            {
+                                guarda_x=1;
+                            }
+                            if(y==3)
+                            {
+                                guarda_x=2;
+                            }
+                            if(y==5)
+                            {
+                                guarda_x=3;
+                             }
+                             if(y==7)
+                             {
+                                guarda_x=4;
+                            }
+                             if(y==9)
+                             {
+                                guarda_x=5;
+                             }
+                             if(y==11)
+                            {
+                                guarda_x=6;
+                             }
+                 }
+                      
+             }
+             
+         }
+         for(y=0;y<11;y++)
+         {
+             //OBTENGO NOMBRE DE LA ESTACION DONDE SE COMBINA
+             if(LC[guarda_y][y]=="1"&& LC[guarda_x][y]=="1")
+             {
+                 for(x=0;x<30;x++)
+                 {
+                     if(lineas[guarda_yf][x]==LC[0][y])
+                    {
+                         for(z=0;z<30;z++)
+                         {
+                             //CALCULO LA DISTANCIA DESDE LA COMBIONACION FINAL HASTA LA PRIMERA COMBINACION DESDE LA ESTACION DESTINO
+                             if(lineas[guarda_yf][z]==lineas[find_lf+1][comb_f[0][0]])
+                             {
+                                 
+                               if((x-z)<0)
+                                 {
+                                     valor_f=(x-z)*-1;
+                                 }
+                                 else
+                                     valor_f=x-z; 
+                             }
+                         } 
+                    }
+                 }
+                 for(x=0;x<30;x++)
+                 {
+                     if(lineas[guarda_xf][x]==LC[0][y])
+                    {
+                         for(z=0;z<30;z++)
+                         {
+                             //CALCULO LA DISTANCIA DESDE LA COMBIONACION FINAL HASTA LA PRIMERA COMBINACION DESDE LA ESTACION ORIGEN
+                             if(lineas[guarda_xf][z]==lineas[find_li+1][comb_i[0][0]])
+                             {
+                                 
+                               if((x-z)<0)
+                                 {
+                                     valor_i=(x-z)*-1;
+                                 }
+                                 else
+                                     valor_i=x-z;     
+                             }
+                         }
+                         
+                    }
+                 } 
+             }
+         }
+       cout<<endl<<valor_i+valor_f+menor_f+menor_i<<endl;  
+     } 
 }
