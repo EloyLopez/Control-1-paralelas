@@ -162,7 +162,7 @@ int main(int argc, char** argv) {
         for(z=0;z<11;z++)
         {
             
-            if(LC[0][z]==lineas[find_li+1][x])
+            if(LC[0][z]==lineas[find_lf+1][x])
             {
                 comb[0][j]=x;
               
@@ -200,7 +200,56 @@ int main(int argc, char** argv) {
             }
         }
     }
-  
+      //COMB GUARDA EL NUMERO DE LA ESTACION EN LA LINEA INICIAL Y CON LAS LINEAS QUE COMBINA
+    /*
+     * Lineas
+     * posicion 0= nombre estacion
+     * posicion 1 y 2= indican linea con la que combina
+     * 1=linea 1
+     * 2=linea 2
+     * 3=linea 4
+     * 4=linea 4A
+     * 5=linea 5
+     * 6=linea 6
+     * 
+     * ejemplo
+     * comb[0][0]=san pablo
+     * comb[1][0]= 1 (combina en la linea 1)
+     * comb[2][0]= 5 (combina en la linea 5)
+     */
+    for(x=0;x<30;x++)
+    {
+        for(z=0;z<11;z++)
+        {
+            
+            if(LC[0][z]==lineas[find_li+1][x])
+            {
+                comb[0][j]=x;
+              
+                h=1;
+               for(k=0;k<7;k++)
+                {
+                  if(LC[k][z]=="1")
+                  {
+                      comb[h][z]=k;
+                      h++;
+                  }
+                }
+                j++;  
+            }
+        }
+    }
+    for(l=0;l<i;l++)
+    {
+        resta[l]=comb[0][l]-find_ei;
+        for(x=1;x<3;x++)
+        {
+            if(comb[x][0]==find_lii)
+            {
+                
+            }
+        }
+    }
 }
 
 
