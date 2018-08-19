@@ -13,8 +13,10 @@ int main(int argc, char** argv) {
 
     string inicio;
     string fin;
+    //distancia
+    int distancia;
     //contadores
-    int x=0,y=0,z=0,i=0,j=0,h=1,k,l=0,n=0,m=0,menor_f=999,menor_i=999;
+    int x=0,y=0,z=0,i=0,j=0,h=1,k,l=0,n=0,m=0,menor_f=999,menor_i=999,u=0,t=0;
     //guarda las combinaciones mas cercanas
     int comb_i[3][1],comb_f[3][1];
     //variable para estacion inicial y linea inicial
@@ -174,13 +176,20 @@ int main(int argc, char** argv) {
             if(LC[0][z]==lineas[find_li+1][x])
             {
                 comb[0][j]=x;
-              
+                
                 h=1;
                for(k=0;k<7;k++)
                 {
                   if(LC[k][z]=="1")
                   {
-                      comb[h][z]=k;
+                      comb[h][u]=k;
+                      
+                      t++;
+                              if(t==2)
+                              {
+                                  t=0;
+                                  u++;
+                              }
                       h++;
                   }
                 }
@@ -191,7 +200,6 @@ int main(int argc, char** argv) {
     //DISTANCIAS DESDE EL ORIGEN HASTA LA COMBINACION MAS CERCANA
     for(l=0;l<i;l++)
     {
-        
         if(comb[0][l]-find_ei<0)
         {
              resta[l]=(comb[0][l]-find_ei)*-1; 
@@ -243,6 +251,8 @@ int main(int argc, char** argv) {
      * comb[1][0]= 1 (combina en la linea 1)
      * comb[2][0]= 5 (combina en la linea 5)
      */
+     u=0;
+     t=0;
     for(x=0;x<30;x++)
     {
         for(z=0;z<11;z++)
@@ -256,7 +266,13 @@ int main(int argc, char** argv) {
                 {
                   if(LC[k][z]=="1")
                   {
-                      comb_d[h][z]=k;
+                      comb_d[h][u]=k;
+                      t++;
+                              if(t==2)
+                              {
+                                  t=0;
+                                  u++;
+                              }
                       h++;
                   }
                 }
@@ -285,12 +301,40 @@ int main(int argc, char** argv) {
         }
         
     }
-     //DISTANCIA DE UNA COMBINACION
-     if(comb_f[1][0]==comb_i[1][0]||comb_f[2][0]==comb_i[1][0]||comb_f[2][0]==comb_i[2][0]||comb_f[1][0]==comb_i[2][0])
+     //DISTANCIA DE UNA COMBINACION Y MISMA ESTACION DE COMBINACION
+     if((comb_f[1][0]==comb_i[1][0]||comb_f[2][0]==comb_i[1][0]||comb_f[2][0]==comb_i[2][0]||comb_f[1][0]==comb_i[2][0])&& lineas[find_lf+1][comb_f[0][0]]==lineas[find_li+1][comb_i[0][0]])
      {
-         cout<<endl<<menor_f+menor_i<<endl;
+         cout<<endl<<menor_f+menor_i<<endl;   
      }
+     //DISTANCIA DE UNA COMBINACION Y DIFERENTE ESTACION DE COMBINACION
+     else if((comb_f[1][0]==comb_i[1][0]||comb_f[2][0]==comb_i[1][0]||comb_f[2][0]==comb_i[2][0]||comb_f[1][0]==comb_i[2][0])&& lineas[find_lf+1][comb_f[0][0]]!=lineas[find_li+1][comb_i[0][0]])
+     {
+         for(x=0;x<30;x++)
+         {
+             if(lineas[find_lf+1][comb_f[0][0]]==lineas[find_lf+1][x])
+             {
+                 distancia=x;
+                 
+             }
+         }
+         for(x=0;x<30;x++)
+         {
+             if(lineas[find_li+1][comb_i[0][0]]==lineas[find_lf+1][x])
+             {
+                ;
+                 if((distancia-x)<0)
+                 {
+                     distancia=(distancia-x)*-1;
+                 }
+                 else
+                     distancia=distancia-x;
+                     
+             }
+         }
+
+         cout<<endl<<menor_f+menor_i+distancia<<endl; 
+     }
+   
      
      
 }
-
