@@ -184,7 +184,7 @@ int main(int argc, char** argv) {
         resta[l]=comb[0][l]-find_ei;
        
     }
-    for(x=0;x<30;x++)
+    for(x=0;x<30;x++)                           // COMENTARIO LINEA DESTINO 
     {
         for(z=0;z<11;z++)
         {
