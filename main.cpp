@@ -182,13 +182,7 @@ int main(int argc, char** argv) {
     for(l=0;l<i;l++)
     {
         resta[l]=comb[0][l]-find_ei;
-        for(x=1;x<3;x++)
-        {
-            if(comb[x][0]==find_lii)
-            {
-                
-            }
-        }
+       
     }
     for(x=0;x<30;x++)
     {
@@ -241,14 +235,7 @@ int main(int argc, char** argv) {
     }
     for(l=0;l<i;l++)
     {
-        resta[l]=comb[0][l]-find_ei;
-        for(x=1;x<3;x++)
-        {
-            if(comb[x][0]==find_lii)
-            {
-                
-            }
-        }
+        resta[l]=comb[0][l]-find_ef;
     }
 }
 
