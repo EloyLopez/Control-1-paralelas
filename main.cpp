@@ -133,7 +133,7 @@ int main(int argc, char** argv) {
     {
         for(z=0;z<11;z++)
         {
-            if(LC[0][z]==lineas[find_li+1][x])        //find_lf cantidad de combinaciones que tiene la linea    
+            if(LC[0][z]==lineas[find_li+1][x])          
             {
                 i++;
             }
@@ -187,6 +187,16 @@ int main(int argc, char** argv) {
             if(comb[x][0]==find_lii)
             {
                 
+            }
+        }
+    }
+    for(x=0;x<30;x++)
+    {
+        for(z=0;z<11;z++)
+        {
+            if(LC[0][z]==lineas[find_lf+1][x])        //find_lf cantidad de combinaciones que tiene la linea destino  
+            {
+                i++;
             }
         }
     }
