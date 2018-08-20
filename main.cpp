@@ -15,17 +15,21 @@ int main(int argc, char** argv) {
     char* ori = argv[2];
     char* dest = argv[3];
     
+    integrantes(argv[1]);
+    
     Esta de abajo seria la funcion 
     
     char* integrantes(char* pa)
 {
-     char* a = pa;
-    char* b = "-v";
-    if(pa==b){
+    char* leftStr = pa;
+    char* rightStr = "-v";
+    int res = strcmp(leftStr, rightStr);
+    if (res==0)
         std::cout<<"****INTEGRANTES****"<<endl;
         cout<<"Felipe Campos"<<" - ";
         cout<<"Eloy Lopez"<<" - ";
-        cout<<"Rodrigo Muñoz"<<endl;}
+        cout<<"Rodrigo Muñoz"<<endl;
+    
     return 0;  
 }
    */
