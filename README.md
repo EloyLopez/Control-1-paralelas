@@ -1,1 +1,7 @@
 # Control-1-paralelas
+
+INTEGRANTES
+
+FELIPE CAMPOS
+ELOY LOPEZ
+RODRIGO MUÑOZ
