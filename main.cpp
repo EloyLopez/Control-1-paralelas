@@ -11,43 +11,19 @@ int main(int argc, char** argv) {
      * @return 
      */
      
-/*  char* pa = argv[1];
+    char* pa = argv[1];
     char* inicio = argv[2];
     char* fin = argv[3];
     
     integrantes(argv[1]);
-    
-    Esta de abajo seria la funcion de -v y -f
-    
-    char* integrantes(char* pa)
-{
-    char* leftStr = pa;
-    char* rightStr = "-v";
-    char* center = "-f";
-    int res = strcmp(leftStr, rightStr);
-    int des = strcmp(leftStr, center);
-    if (res==0)
-        {std::cout<<"*******************INTEGRANTES*******************"<<endl;
-        cout<<"Felipe Campos"<<" - ";
-        cout<<"Eloy Lopez"<<" - ";
-        cout<<"Rodrigo Muñoz"<<endl;
-        cout<<"*************************************************"<<endl;}
-    else{
-        if(des==0)
-           {cout<<"Funcion de f";}
-        else
-            cout<<"Parametro mal ingresado"<<endl;
-    }
-    
-    return 0;  
-}
-   */
-     
+
     integrantes(pa);
     std::cout<<integrantes;
 
   /*string inicio;
     string fin;*/
+     
+     
     //Si es 1 se retrocede, si es 0 se avanza
     int origen=0,destino=0;
     //guarda
