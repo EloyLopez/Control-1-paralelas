@@ -12,8 +12,8 @@ int main(int argc, char** argv) {
      */
      
 /*  char* pa = argv[1];
-    char* ori = argv[2];
-    char* dest = argv[3];
+    char* inicio = argv[2];
+    char* fin = argv[3];
     
     integrantes(argv[1]);
     
@@ -27,10 +27,11 @@ int main(int argc, char** argv) {
     int res = strcmp(leftStr, rightStr);
     int des = strcmp(leftStr, center);
     if (res==0)
-        {std::cout<<"****INTEGRANTES****"<<endl;
+        {std::cout<<"*******************INTEGRANTES*******************"<<endl;
         cout<<"Felipe Campos"<<" - ";
         cout<<"Eloy Lopez"<<" - ";
-        cout<<"Rodrigo Muñoz"<<endl;}
+        cout<<"Rodrigo Muñoz"<<endl;
+        cout<<"*************************************************"<<endl;}
     else{
         if(des==0)
            {cout<<"Funcion de f";}
@@ -45,8 +46,8 @@ int main(int argc, char** argv) {
     integrantes(pa);
     std::cout<<integrantes;
 
-    string inicio;
-    string fin;
+  /*string inicio;
+    string fin;*/
     //Si es 1 se retrocede, si es 0 se avanza
     int origen=0,destino=0;
     //guarda
@@ -96,10 +97,13 @@ int main(int argc, char** argv) {
         "0","0","0","0","0","0","0","0","1","0","1",
         "1","1","0","0","1","1","0","0","0","1","0",
         "0","0","0","1","0","1","1","0","0","0","0"};
-    cout<<endl<<"Estacion de inicio"<<endl;
+     
+    /** SI DEJAMOS ESTO NOS PEDIRA LOS PARAMETRTOS POR SEPARADO*/
+    /*cout<<endl<<"Estacion de inicio"<<endl;
     cin>>inicio;
     cout<<endl<<"Estacion de termino"<<endl;
-    cin>>fin;
+    cin>>fin;*/
+     
     //FUNCION QUE MUESTRA COMO LA ESTACION DE ORIGEN GUARDANDO SU FILA Y SU COLUMNA
     for(y=0;y<12;y++)
     {
