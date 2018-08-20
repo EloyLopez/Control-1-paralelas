@@ -6,10 +6,32 @@ using namespace std;
 int main(int argc, char** argv) {
      /**
      * 
-     * @param argc Codigo Estacion de Origen
+     * @param argc Codigo Cantidad de Argumentos
      * @param argv Codigo Estacion de Destino
      * @return 
      */
+     
+/*  char* pa = argv[1];
+    char* ori = argv[2];
+    char* dest = argv[3];
+    
+    Esta de abajo seria la funcion 
+    
+    char* integrantes(char* pa)
+{
+     char* a = pa;
+    char* b = "-v";
+    if(pa==b){
+        std::cout<<"****INTEGRANTES****"<<endl;
+        cout<<"Felipe Campos"<<" - ";
+        cout<<"Eloy Lopez"<<" - ";
+        cout<<"Rodrigo Muñoz"<<endl;}
+    return 0;  
+}
+   */
+     
+    integrantes(pa);
+    std::cout<<integrantes;
 
     string inicio;
     string fin;
