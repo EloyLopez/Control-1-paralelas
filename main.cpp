@@ -333,7 +333,7 @@ int main(int argc, char** argv) {
                 
              }
          cout<<lineas[find_lf+1][find_ef]<<endl;
-         cout<<endl<<menor_f+menor_i<<endl;   
+        
      }
      //DISTANCIA DE UNA COMBINACION Y DIFERENTE ESTACION DE COMBINACION
      else if((comb_f[1][0]==comb_i[1][0]||comb_f[2][0]==comb_i[1][0]||comb_f[2][0]==comb_i[2][0]||comb_f[1][0]==comb_i[2][0])&& lineas[find_lf+1][comb_f[0][0]]!=lineas[find_li+1][comb_i[0][0]])
@@ -596,7 +596,7 @@ int main(int argc, char** argv) {
                 
              }
          cout<<lineas[find_lf+1][find_ef]<<endl;
-         cout<<endl<<menor_f+menor_i+distancia<<endl; 
+         
      }
      
      //COMBINACION 3 LINEAS
