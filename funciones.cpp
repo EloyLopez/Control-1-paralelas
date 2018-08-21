@@ -9,21 +9,21 @@ using namespace std;
 char* integrantes(char* pa)
 {
     char* leftStr = pa;
-    char* rightStr = "-v";
-    char* center = "-f";
+    char* rightStr = "-f";
+    char* center = "-v";
     int res = strcmp(leftStr, rightStr);
     int des = strcmp(leftStr, center);
     if (res==0)
-        {cout<<endl;
+        {}
+    else{
+        if(des==0)
+           {
+            cout<<endl;
         std::cout<<"*******************INTEGRANTES*******************"<<endl;
         cout<<"Felipe Campos"<<" - ";
         cout<<"Eloy Lopez"<<" - ";
         cout<<"Rodrigo Muñoz"<<endl;
-        cout<<"*************************************************"<<endl;}
-    else{
-        if(des==0)
-           {
-            
+        cout<<"*************************************************"<<endl;
             
         }
         else
