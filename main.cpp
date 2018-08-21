@@ -19,17 +19,15 @@ int main(int argc, char** argv) {
 
     integrantes(pa);
     std::cout<<integrantes;
-
-  /*string inicio;
-    string fin;*/
-     
-     
+  
     //Si es 1 se retrocede, si es 0 se avanza
-    int origen=0,destino=0;
+    int origen=0,destino=0,intermedio=0;
     //guarda
-    int guarda_x, guarda_y,guarda_xf,guarda_yf,valor_i,valor_f;
+    int guarda_x, guarda_y,guarda_xf,guarda_yf,valor_i,valor_f,valor_lf,valor_li,num=0,indicador=0;
     //distancia
     int distancia;
+    //linea
+    int linea;
     //contadores
     int x=0,y=0,z=0,i=0,j=0,h=1,k,l=0,n=0,m=0,menor_f=999,menor_i=999,u=0,t=0,w=0;
     //guarda las combinaciones mas cercanas
@@ -73,13 +71,7 @@ int main(int argc, char** argv) {
         "0","0","0","0","0","0","0","0","1","0","1",
         "1","1","0","0","1","1","0","0","0","1","0",
         "0","0","0","1","0","1","1","0","0","0","0"};
-     
-    /** SI DEJAMOS ESTO NOS PEDIRA LOS PARAMETRTOS POR SEPARADO*/
-    /*cout<<endl<<"Estacion de inicio"<<endl;
-    cin>>inicio;
-    cout<<endl<<"Estacion de termino"<<endl;
-    cin>>fin;*/
-     
+
     //FUNCION QUE MUESTRA COMO LA ESTACION DE ORIGEN GUARDANDO SU FILA Y SU COLUMNA
     for(y=0;y<12;y++)
     {
@@ -175,19 +167,17 @@ int main(int argc, char** argv) {
         {
              resta[l]=(comb[0][l]-find_ei)*-1; 
              
+             
              origen=1;
         }
-        
         else
         {
           resta[l]=comb[0][l]-find_ei;
           origen=0;
-        }
-            
+        }  
         //COMBINACION MAS PROXIMA DESDE EL INICIO
         if(resta[l]<menor_i)
         {
-            
             if(resta[l]!=0)
             {
                 //GUARDA LA COMBINACION MAS CERCA AL ORIGEN Y MUESTRA CON QUE LINEAS COMBINA
@@ -198,7 +188,6 @@ int main(int argc, char** argv) {
             } 
         }   
     }
-   
     /*
      AQUI EMPIEZA EL DESTINO
      */
@@ -213,7 +202,6 @@ int main(int argc, char** argv) {
             }
         }
     }
-    
      int comb_d[3][n],resta_d[n];
       //COMB_D GUARDA EL NUMERO DE LA ESTACION EN LA LINEA INICIAL Y CON LAS LINEAS QUE COMBINA
     /*
@@ -268,19 +256,15 @@ int main(int argc, char** argv) {
         {
              resta_d[l]=(comb_d[0][l]-find_ef)*-1; 
              destino=1;
-        }
-        
+        }   
         else
         {
             resta_d[l]=comb_d[0][l]-find_ef;
             destino=0;
         }
-            
-        
         //COMBINACION MAS PROXIMA DESDE EL DESTINO
         if(resta_d[l]<menor_f)
-        {
-            
+        {   
             if(resta_d[l]!=0)
             {
                 //OBTIENE EL LA MENOR DISTANCIA ENTRE DESTINO Y SU COMBINACION
@@ -289,16 +273,15 @@ int main(int argc, char** argv) {
                 comb_f[0][0]=comb_d[0][l];
                 comb_f[1][0]=comb_d[1][l];
                 comb_f[2][0]=comb_d[2][l];
-            }
-            
+            }   
         }
-        
     }
      string avance_inicio[menor_i];
      string avance_final[menor_f];
      //DISTANCIA DE UNA COMBINACION Y MISMA ESTACION DE COMBINACION
      if((comb_f[1][0]==comb_i[1][0]||comb_f[2][0]==comb_i[1][0]||comb_f[2][0]==comb_i[2][0]||comb_f[1][0]==comb_i[2][0])&& lineas[find_lf+1][comb_f[0][0]]==lineas[find_li+1][comb_i[0][0]])
      {
+       
         //MUESTA LA DISTANCIA MAS CORTA
          if(origen==0)
          {
@@ -355,32 +338,264 @@ int main(int argc, char** argv) {
      //DISTANCIA DE UNA COMBINACION Y DIFERENTE ESTACION DE COMBINACION
      else if((comb_f[1][0]==comb_i[1][0]||comb_f[2][0]==comb_i[1][0]||comb_f[2][0]==comb_i[2][0]||comb_f[1][0]==comb_i[2][0])&& lineas[find_lf+1][comb_f[0][0]]!=lineas[find_li+1][comb_i[0][0]])
      {
+         
          //distancia desde el destino a su combinacion mas cercana
          for(x=0;x<30;x++)
          {
-             if(lineas[find_li+1][comb_i[0][0]]==lineas[find_lf+1][x])
+             if(lineas[find_lf+1][comb_f[0][0]]==lineas[find_li+1][x])
              {
+                
+                 indicador=2;
                  for(y=0;y<30;y++)
                   {
-                        if(lineas[find_lf+1][comb_f[0][0]]==lineas[find_lf+1][y])
+                        if(lineas[find_lf+1][comb_f[0][0]]==lineas[find_li+1][y])
                         {
+                            valor_lf=y;
                              distancia=y;
+                             
                         }
                    }
-                 
-                 if((distancia-x)<0)
+                 for(y=0;y<30;y++)
                  {
-                     distancia=(distancia-x)*-1;
+                     
+                     if(lineas[find_li+1][find_ei]==lineas[find_li+1][y])
+                     {
+                         
+                         valor_li=y;
+                         if((valor_lf-valor_li)<0)
+                         {
+                             distancia=(valor_lf-valor_li)*-1;
+                             intermedio=1;
+                        }
+                          else
+                            distancia=valor_lf-valor_li; 
+                        }
                  }
-                 else
-                     distancia=distancia-x;    
+                // menor_i=0;   
+                 num=1;
              }
-             
-             else
+             else if(lineas[find_li+1][comb_i[0][0]]==lineas[find_lf+1][x])
              {
                  
+                 indicador=1;
+                for(y=0;y<30;y++)
+                  {
+                    
+                        if(lineas[find_li+1][comb_i[0][0]]==lineas[find_lf+1][y])
+                        {
+                            
+                            valor_li=y;
+                             distancia=y;
+                             
+                        }
+                   }
+                 for(y=0;y<30;y++)
+                 {
+                     
+                     if(lineas[find_lf+1][find_ef]==lineas[find_lf+1][y])
+                     {
+                         valor_lf=y;
+                         if((valor_lf-valor_li)<0)
+                         {
+                             
+                             distancia=(valor_lf-valor_li)*-1;
+                             intermedio=1;
+                             
+                             
+                        }
+                          else
+                          {
+                             distancia=valor_lf-valor_li; 
+                             intermedio=0;
+                          }
+                            
+                         
+                        }
+                 }
+                num=1;
+             }
+             
+             else if (distancia==0 && (x+1)==30)
+             {
+                 for (y=0;y<12;y++)
+                 {
+                    for(int o=0;o<30;o++)
+                    {
+                        //GUARDA LA LINEA EN LA QUE ESTA LA ESTACION DONDE SE COMBINA
+                        if(lineas[find_lf+1][comb_f[0][0]]==lineas[y][o] && (find_lf+1)!=y)
+                        { 
+                            linea=y;
+                            for(z=0;z<30;z++)
+                            {
+                                if(lineas[y][z]==lineas[find_lf+1][comb_f[0][0]])
+                                {
+                                    valor_f=z;
+                                    
+                                }
+                                if(lineas[y][z]==lineas[find_li+1][comb_i[0][0]])
+                                {
+                                    valor_i=z;
+                                    
+                                }
+                            }  
+                        }
+                    }
+                 } 
+                if((valor_f-valor_i)<0)
+                {
+                    distancia=(valor_f-valor_i)*-1;
+                    intermedio=1;
+                }
+                else
+                {
+                    distancia=valor_f-valor_i;
+                    intermedio=0;
+                }
+                    
              }  
          }
+         string avance_intermedio[distancia];
+         //EMPIEZA A MOSTRAR PARA 2 CAMBIOS DE LINEAS
+         if(origen==0)
+         {
+             y=1;
+             for(x=0;x<menor_i;x++)
+             {
+                 
+                  avance_inicio[x]=lineas[find_li+1][find_ei+y];
+                  
+                 y++;
+             }
+         }
+         else
+         {
+             y=1;
+             for(x=0;x<menor_i;x++)
+             {
+                 avance_inicio[x]=lineas[find_li+1][find_ei-y];
+                 
+                 y++;
+             }
+         }
+        if(destino==0)
+         {
+             y=1;
+             for(x=0;x<(menor_f-1);x++)
+             {
+                 avance_final[x]=lineas[find_lf+1][find_ef+y];
+                 y++;
+             }
+         }
+         else
+         {
+             y=1;
+             for(x=0;x<(menor_f-1);x++)
+             {
+           
+                 avance_final[x]=lineas[find_lf+1][find_ef-y];
+                 y++;
+             }
+         }
+         if(intermedio==0)
+         {
+             y=1;
+             for(x=0;x<(distancia);x++)
+             {
+                 if(num==1)
+                 {
+                     if(indicador==1)
+                     {
+                         avance_intermedio[x]=lineas[find_lf+1][valor_li+y];
+                          y++;
+                     }
+                     else if(indicador==2)
+                     {
+                         avance_intermedio[x]=lineas[find_li+1][valor_li+y];
+                         y++;
+                     }
+                     
+                     
+                 }
+                 else
+                 {
+                     
+                      avance_intermedio[x]=lineas[linea][valor_i+y];
+                    y++; 
+                 }
+               
+             }
+         }
+         else
+         {
+              y=1;
+             for(x=0;x<(distancia);x++)
+             {
+                 if(num==1)
+                 {
+                     if(indicador==1)
+                     {
+                         avance_intermedio[x]=lineas[find_lf+1][valor_li-y];
+                        y++;
+                     }
+                     else if(indicador==2)
+                     {
+                         avance_intermedio[x]=lineas[find_li+1][valor_li-y];
+                         y++;
+                     }
+                     
+                 }
+                 else
+                 {
+                     avance_intermedio[x]=lineas[linea][valor_i-y];
+                    
+                    y++; 
+                 }
+                       
+             }
+         }
+         if(menor_i!=0)
+         {
+             cout<<endl<<lineas[find_li+1][find_ei]<< "-";
+         }
+         
+         
+         
+         for(x=0;x<menor_i;x++)
+             {
+                cout<< avance_inicio[x]<<"-";
+                
+             }
+         if(indicador==1)
+         {for(x=0;x<distancia-1;x++)
+         {
+            
+             cout<<avance_intermedio[x]<<"-";
+         }
+             
+         }
+         else if(indicador==2)
+         {
+             for(x=1;x<distancia;x++)
+         {
+            
+             cout<<avance_intermedio[x]<<"-";
+         }
+         }
+         else
+         {
+              for(x=0;x<distancia;x++)
+         {
+            
+             cout<<avance_intermedio[x]<<"-";
+         }
+         }
+        
+         for(x=0;x<menor_f;x++)
+             {
+                cout<< avance_final[x]<<"-";
+                
+             }
+         cout<<lineas[find_lf+1][find_ef]<<endl;
          cout<<endl<<menor_f+menor_i+distancia<<endl; 
      }
      
@@ -388,6 +603,7 @@ int main(int argc, char** argv) {
      
      else if((comb_f[1][0]!=comb_i[1][0]||comb_f[2][0]!=comb_i[1][0]||comb_f[2][0]!=comb_i[2][0]||comb_f[1][0]!=comb_i[2][0]))
      {
+         
          for(y=0;y<12;y++)
          {
              for(x=0;x<30;x++)
@@ -462,8 +678,8 @@ int main(int argc, char** argv) {
              //OBTENGO NOMBRE DE LA ESTACION DONDE SE COMBINA
              if(LC[guarda_y][y]=="1"&& LC[guarda_x][y]=="1")
              {
-                 for(x=0;x<30;x++)
-                 {
+                for(x=0;x<30;x++)
+                {
                      if(lineas[guarda_yf][x]==LC[0][y])
                     {
                          for(z=0;z<30;z++)
@@ -481,7 +697,7 @@ int main(int argc, char** argv) {
                              }
                          } 
                     }
-                 }
+                }
                  for(x=0;x<30;x++)
                  {
                      if(lineas[guarda_xf][x]==LC[0][y])
