@@ -14,7 +14,11 @@ char* integrantes(char* pa)
     int res = strcmp(leftStr, rightStr);
     int des = strcmp(leftStr, center);
     if (res==0)
-        {}
+        {
+        cout<<endl;
+        cout<<"*******************"<<endl;
+        cout<<"OPCIONES ELEGIDAS DE ESTACIONES"<<endl;
+        cout<<"*******************"<<endl;}
     else{
         if(des==0)
            {
